@@ -40,7 +40,7 @@ jobs:
           destination: reports
       - store_test_results:
           path: test results
-workflows:
+workflow:
   build_test:
     jobs:
       - build

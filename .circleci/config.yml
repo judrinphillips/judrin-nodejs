@@ -2,7 +2,7 @@ defaults: &defaults
   workingdrectory: ~/JP_Nodejs_project
   docker:
     - image: circleci/node:8
-version: 2
+version: 2.1
 jobs:
   build:
     <<: *defaults
@@ -41,8 +41,8 @@ jobs:
       - store_test_results:
           path: test results
 workflow:
-version: 2
-  build_test:
+version: 2.1
+
     jobs:
       - build
       - test:

@@ -1,64 +1,72 @@
-defaults: &defaults
-  workingdrectory: ~/JP_Nodejs_project
+
+---
+defaults:
   docker:
-    - image: circleci/node:8
-version: 2.0
+    -
+      image: "circleci/node:8"
+  workingdrectory: ~/JP_Nodejs_project
 jobs:
   build:
-    <<: *defaults
+    docker:
+      -
+        image: "circleci/node:8"
     steps:
       - checkout
-      - run:
-         - name: yarn install
-         - command: yarn
-      - save_cache:
-          key: v1-{{arch}}-cache-{{ checksum "package.json"}}
+      -
+        run:
+          -
+            name: "yarn install"
+          -
+            command: yarn
+      -
+        save_cache:
+          key: "v1-{{arch}}-cache-{{ checksum \"package.json\"}}"
           paths:
             - ./node_modules
+    workingdrectory: ~/JP_Nodejs_project
   test:
-    <<: *defaults
+    docker:
+      -
+        image: "circleci/node:8"
     steps:
       - checkout
-
-      - restore_cache:
-          key: v1-{{arch}}-cache-{{ checksum "package.json"}}
-      - run:
-          - name: set up test output
-          - command: mkdir -p testresults/ava
-      - run:
-          - name: Run Test
-          - command: yarn test | npx tap-xunit > test-results/ava/results.xml
-
-      - run:
-          - name: Run cverage report
-          - command: yarn coverage > coverage-report.lcov
-      - store_artifacts:
-          path: test-results/ava/results.xml
+      -
+        restore_cache:
+          key: "v1-{{arch}}-cache-{{ checksum \"package.json\"}}"
+      -
+        run:
+          -
+            name: "set up test output"
+          -
+            command: "mkdir -p testresults/ava"
+      -
+        run:
+          -
+            name: "Run Test"
+          -
+            command: "yarn test | npx tap-xunit > test-results/ava/results.xml"
+      -
+        run:
+          -
+            name: "Run cverage report"
+          -
+            command: "yarn coverage > coverage-report.lcov"
+      -
+        store_artifacts:
           destination: test-resuts/ava/
-      - store_artifacts:
-          path: coverage-report.lcov
+          path: test-results/ava/results.xml
+      -
+        store_artifacts:
           destination: reports
-      - store_test_results:
-          path: test results
-workflow:
-version: 2.0
+          path: coverage-report.lcov
+      -
+        store_test_results:
+          path: "test results"
+    workingdrectory: ~/JP_Nodejs_project
+version: |-
+    2.0
 
-
-    jobs
-      - build
-      - test
-          requires
-            - build
-          filters
-            branches
-              only
-               - master
-
-
-
-
-
-
-
+    jobs - build - test requires - build filters branches only - master
+workflow: ~
 
 

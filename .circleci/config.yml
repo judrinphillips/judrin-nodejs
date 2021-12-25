@@ -44,14 +44,14 @@ workflow:
 version: 2.0
 
 
-    jobs:
+    jobs
       - build
-      - test:
+      - test
           requires:
             - build
-          filters:
-            branches:
-              only:
+          filters
+            branches
+              only
                - master
 
 

@@ -43,9 +43,10 @@ jobs:
 workflow:
 version: 2.0
 
+
     jobs:
-      - build
-      - test:
+       build
+       test:
           requires:
             - build
           filters:

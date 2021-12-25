@@ -1,11 +1,14 @@
-defaults: &defaults
-  workingdrectory: ~/JP_Nodejs_project
-  docker:
-    - image: cimg/node:17.3.0
+
+
+
 version: 2.1
+orbs:
+  node: circleci/node@4.1.0
 jobs:
   build:
-    <<: *defaults
+    docker:
+      - image: cimg/node:17.3.0
+    working_directory: ~/project
     steps:
       - checkout
       - run:
@@ -21,9 +24,18 @@ jobs:
           paths:
             - ./node_modules
   test:
-    <<: *defaults
+
+    docker:
+      - image: img/node:17.3.0
+
+
+
+
     steps:
       - checkout
+      - run:
+          name: install jest
+
 
       - restore_cache:
           key: v1-{{arch}}-cache-{{ checksum "package.json"}}
@@ -33,7 +45,7 @@ jobs:
                mkdir -p testresults/ava
       - run:
           name: Run Test
-          command: yarn test | npx tap-xunit > test-results/ava/results.xml
+          command: npm test | npx tap-xunit > test-results/ava/results.xml
 
       - run:
           name: Run cverage report
@@ -47,18 +59,22 @@ jobs:
       - store_test_results:
           path: test results
 workflow:
- version: 2
+ version: 2.1
  build-test:
+   jobs:
+     - build:
+     - test:
+         requires:
+           - build
+         filters:
+           branches:
+             only: main
 
 
-    jobs:
-      - build:
-      - test:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+
+
+
+
 
 
 

@@ -1,4 +1,3 @@
-
 ---
 defaults:
   docker:
@@ -65,7 +64,6 @@ jobs:
     workingdrectory: ~/JP_Nodejs_project
 version: |-
     2.1
-
+    
     jobs - build - test requires - build filters branches only - master
 workflow: ~
-

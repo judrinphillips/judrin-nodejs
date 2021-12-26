@@ -33,8 +33,12 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-      - run: |
-          npm run test
+      - run:
+          name: npm test
+          command: |
+            npm run test
+            
+          
 
 
 workflow:

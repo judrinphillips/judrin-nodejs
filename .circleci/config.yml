@@ -16,10 +16,14 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
+
+
       - run:
+
           name: npm install
+
           command: |
-              yum install npm
+              npm install
               ls -al
               node --version
               echo "hello world" 

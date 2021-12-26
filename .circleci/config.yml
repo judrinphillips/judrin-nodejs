@@ -26,9 +26,16 @@ jobs:
               npm install
               ls -al
               node --version
-              echo "hello world" 
+              echo "hello world"
+  test:
+    docker:
+      - image: cimg/node:17.3.0
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run: |
+          npm run test
 
-      
 
 workflow:
  version: 2.1
@@ -41,7 +48,6 @@ workflow:
          filters:
            branches:
              only: main
-
 
 
 

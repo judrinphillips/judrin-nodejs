@@ -48,7 +48,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-           npm run test
+           npm run test | npx tap-xunit > test-results/ava/results.xml
+           
 
 
 

@@ -47,7 +47,8 @@ jobs:
             mkdir -p test -p testresults/ava
       - run:
           name: Run tests
-          command: npm run test
+          command: |
+          npm run test
 
 
 

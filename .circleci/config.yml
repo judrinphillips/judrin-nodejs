@@ -19,7 +19,7 @@ jobs:
       - run:
           name: npm install
           command: |
-              sudo yum install npm
+              yum install npm
               ls -al
               node --version
               echo "hello world" 

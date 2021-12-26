@@ -32,7 +32,7 @@ jobs:
               node --version
               echo "hello world"
       - save_cache:
-          key: v1-{{arch}}-cache-{{ checksum "package.json}}
+          key: v1-{{arch}}-cache-{{ checksum "package.json"}}
           paths:
             - ./node_modules
   test:
@@ -40,7 +40,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{arch}}-cache-{{ checksum "package.json}
+          key: v1-{{arch}}-cache-{{ checksum "package.json"}
       - run:
           name: set up test output directory
           command: | 

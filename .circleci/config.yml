@@ -1,7 +1,7 @@
 
 
 
-version: 2
+version: 2.1
 
 parameters:
 dependencies:
@@ -57,7 +57,7 @@ jobs:
 
 
 workflow:
- version: 2
+ version: 2.1
  build-test:
    jobs:
      - build:
